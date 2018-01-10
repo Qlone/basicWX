@@ -1,4 +1,8 @@
 package com.wx.menu.websocket;
 
-public class Contorller {
+
+import javax.websocket.server.ServerEndpoint;
+
+@ServerEndpoint("/")
+public class WelcomeContorller {
 }
