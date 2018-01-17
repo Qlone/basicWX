@@ -19,18 +19,19 @@ public class SubmitController {
     SubmitService submitService;
 
     @ResponseBody
-    @RequestMapping("/income")
+    @RequestMapping("")
     public String test(){
 
         return "ss";
     }
     @ResponseBody
-    @RequestMapping("/s")
+    @RequestMapping("/income")
     public Object incomeSumbit(ModelAndView modelMap,
             @RequestParam(required = false,value = "type")String type,
-            @RequestParam(required = false,value = "money")BigDecimal money){
+            @RequestParam(required = false,value = "money")String money){
         try {
-            boolean res = submitService.insertBill(type, money);
+            BigDecimal bigDecimal = BigDecimal.valueOf(Double.valueOf(money));
+            boolean res = submitService.insertBill(type, bigDecimal);
 
             modelMap.addObject("res", res);
         }catch (Exception e){
