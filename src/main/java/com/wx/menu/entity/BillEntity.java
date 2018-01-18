@@ -1,13 +1,17 @@
 package com.wx.menu.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class BillEntity {
     private String idBill;
     private String idUser;
     private String type;
     private BigDecimal money;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdDate;
 
     public String getIdBill() {
