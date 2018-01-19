@@ -5,6 +5,7 @@ import com.wx.menu.http.dmz.service.CountDataService;
 import com.wx.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,10 +20,11 @@ public class CountDataController {
     CountDataService countDataService;
 
     @ResponseBody
-    @RequestMapping("/bill")
-    public Object getBill(ModelAndView modelAndView){
+    @RequestMapping("/bill/{page}")
+    public Object getBill(ModelAndView modelAndView,
+                          @PathVariable String page){
         try {
-            List<BillEntity> res = countDataService.getBill();
+            List<BillEntity> res = countDataService.getBill(page);
             modelAndView.addObject("res",res);
         } catch (Exception e) {
             LogUtil.context(this).error("获取出错",e);
