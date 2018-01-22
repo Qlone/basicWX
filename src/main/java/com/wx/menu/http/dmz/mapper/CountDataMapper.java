@@ -12,9 +12,9 @@ public interface CountDataMapper {
      * 获取账单
      */
     @Select("SELECT id_user as idUser, money as money, type as type ,created_date as createdDate" +
-            " FROM bill" +
+            " FROM bill WHERE id_user = #{billEntity.idUser}" +
             " ORDER BY created_date DESC" +
             " LIMIT #{offset},#{limit}")
 
-    List<BillEntity> getBill(@Param("offset")int offset,@Param("limit") int limit) throws Exception;
+    List<BillEntity> getBill(@Param("billEntity")BillEntity billEntity,@Param("offset")int offset,@Param("limit") int limit) throws Exception;
 }

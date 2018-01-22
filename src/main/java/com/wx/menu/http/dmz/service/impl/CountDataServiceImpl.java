@@ -17,11 +17,12 @@ public class CountDataServiceImpl implements CountDataService {
     CountDataMapper countDataMapper;
 
     @Override
-    public List<BillEntity> getBill(String page) throws Exception {
+    public List<BillEntity> getBill(String userId,String page) throws Exception {
         if(StringUtils.isEmpty(page) || !NumberUtils.isNumber(page)){
             return new ArrayList<>();
         }
-
-        return countDataMapper.getBill((Integer.parseInt(page)-1)*8,8);
+        BillEntity billEntity = new BillEntity();
+        billEntity.setIdUser(userId);
+        return countDataMapper.getBill(billEntity,(Integer.parseInt(page)-1)*8,8);
     }
 }

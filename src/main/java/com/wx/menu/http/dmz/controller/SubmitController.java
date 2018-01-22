@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller("SubmitController")
-@RequestMapping("/menu")
+@RequestMapping("/m/menu")
 public class SubmitController {
     @Autowired
     SubmitService submitService;
@@ -25,12 +25,13 @@ public class SubmitController {
     @ResponseBody
     @RequestMapping("/income")
     public Object incomeSumbit(ModelAndView modelMap,
+                               @RequestParam(required = false,value = "userId") String userId,
                                @RequestParam(required = false,value = "type")String type,
                                @RequestParam(required = false,value = "money")String money,
                                @RequestParam(required = false,value = "newType")boolean newType){
         try {
             BigDecimal bigDecimal = BigDecimal.valueOf(Double.valueOf(money));
-            boolean res = submitService.insertBill(type, bigDecimal,newType);
+            boolean res = submitService.insertBill(userId,type, bigDecimal,newType);
 
             modelMap.addObject("res", res);
         }catch (Exception e){
@@ -42,10 +43,11 @@ public class SubmitController {
 
     @ResponseBody
     @RequestMapping("/type")
-    public Object getTypeList(ModelAndView modelAndView){
+    public Object getTypeList(ModelAndView modelAndView,
+                              @RequestParam(required = false,value = "userId") String userId){
         List<TypeEntity> res = null;
         try {
-            res = submitService.getTypeList();
+            res = submitService.getTypeList(userId);
         } catch (Exception e) {
             LogUtil.context(this).error("获取类型出错",e);
             res = new ArrayList<>();

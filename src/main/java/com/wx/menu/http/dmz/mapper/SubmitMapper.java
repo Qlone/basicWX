@@ -21,12 +21,12 @@ public interface SubmitMapper {
             " VALUES(REPLACE(UUID(),'-','') , #{idUser} , #{type} , #{money} , NOW())")
     int insertBill(BillEntity billEntity) throws Exception;
 
-    @Insert("INSERT INTO type(id_type,type,created_date)" +
-            " VALUES(REPLACE(UUID(),'-','') , #{type} , NOW())")
+    @Insert("INSERT INTO type(id_type,id_user,type,created_date)" +
+            " VALUES(REPLACE(UUID(),'-','') , #{idUser},#{type} , NOW())")
     int insertType(TypeEntity entity) throws  Exception;
 
     @Select("SELECT type as type " +
-            "  FROM type " +
+            "  FROM type WHERE id_user = #{idUser}" +
             " ORDER BY created_date DESC")
     List<TypeEntity> getTypeList(TypeEntity typeEntity) throws Exception;
 }

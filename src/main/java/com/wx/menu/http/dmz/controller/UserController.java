@@ -1,7 +1,7 @@
 package com.wx.menu.http.dmz.controller;
 
 import com.wx.menu.entity.BillEntity;
-import com.wx.menu.http.dmz.service.CountDataService;
+import com.wx.menu.http.dmz.service.UserService;
 import com.wx.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,18 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/m/data")
-public class CountDataController {
+@RequestMapping("/m/user")
+public class UserController {
     @Autowired
-    CountDataService countDataService;
+    UserService userService;
 
     @ResponseBody
-    @RequestMapping("/bill/{page}")
-    public Object getBill(ModelAndView modelAndView,
-                          @RequestParam(required = false,value = "userId") String userId,
-                          @PathVariable String page){
+    @RequestMapping("/id")
+    public Object getUserId(ModelAndView modelAndView,
+                          @RequestParam(value = "activeCode")String activeCode){
         try {
-            List<BillEntity> res = countDataService.getBill(userId,page);
+            String res = userService.getUserId(activeCode);
             modelAndView.addObject("res",res);
         } catch (Exception e) {
             LogUtil.context(this).error("获取出错",e);

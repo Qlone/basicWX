@@ -9,14 +9,14 @@ public interface SubmitService {
     void test();
 
 
-    boolean insertBill(String type, BigDecimal money, boolean newType) throws Exception;
+    boolean insertBill(String userId,String type, BigDecimal money, boolean newType) throws Exception;
 
-    boolean insertType(String type) throws Exception;
+    boolean insertType(String userId,String type) throws Exception;
 
     /**
      * 获取类型
      * @return
      * @throws Exception
      */
-    List<TypeEntity> getTypeList() throws Exception;
+    List<TypeEntity> getTypeList(String userId) throws Exception;
 }

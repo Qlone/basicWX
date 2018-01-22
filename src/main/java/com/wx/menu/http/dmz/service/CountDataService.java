@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CountDataService {
 
-    List<BillEntity> getBill(String page) throws Exception;
+    List<BillEntity> getBill(String userId,String page) throws Exception;
 }
